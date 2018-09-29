@@ -1,0 +1,32 @@
+#!/bin/sh
+
+export PATH=$DEVKITPPC/bin:$PATH
+export ARCH="-mcpu=750 -meabi -mhard-float"
+
+./configure --prefix=$DEVKITPRO/portlibs/ppc/ \
+--enable-cross-compile \
+--cross-prefix=$DEVKITPPC/bin/powerpc-eabi- \
+--disable-shared \
+--disable-runtime-cpudetect \
+--disable-programs \
+--disable-doc \
+--disable-everything \
+--enable-decoder=mpeg4,h264,aac,ac3,mp3 \
+--enable-demuxer=mov,h264 \
+--enable-filter=rotate,transpose \
+--enable-protocol=file \
+--enable-static \
+--enable-small \
+--arch=ppc \
+--cpu=750 \
+--target-os=none \
+--extra-cflags=" -D__WIIU__ -fomit-frame-pointer -ffast-math $ARCH" \
+--extra-cxxflags=" -D__WIIU__ -fomit-frame-pointer -ffast-math -fno-rtti -fno-exceptions -std=gnu++11 $ARCH" \
+--extra-ldflags=" -Wl,-q -Wl,-z,nocopyreloc -T $WUT_ROOT/share/wut.ld -L$WUT_ROOT/lib -lcoreinit -lwutcrt " \
+--disable-debug \
+--disable-bzlib \
+--disable-iconv \
+--disable-lzma \
+--disable-securetransport \
+--disable-xlib \
+--disable-zlib
